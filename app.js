@@ -1,23 +1,19 @@
-const   express     = require('express');
-        app         = express();
-        bodyParser  = require('body-parser');
-        mongoose    = require('mongoose');
+const   express     = require('express'),
+        app         = express(),
+        Campground  = require('./models/campgrounds'),
+        Comment     = require('./models/comments'),
+        User        = require('./models/users'),
+        seedDB      = require('./models/seeds'),
+        bodyParser  = require('body-parser'),
+        mongoose    = require('mongoose'),
         url         = 'mongodb://localhost:27017/data';
-        dbName      = 'YelpCamp';
 
-
+//seedDB();
 mongoose.connect(url,  {useNewUrlParser: true, useUnifiedTopology: true }, function(err, client){
     if (err) throw err;
     console.log("DB connected");
 });
 
-// SCHEMA SETUP
-const campSchema = new mongoose.Schema({
-    name: String, 
-    image: String,
-    description: String
-});
-const Campaground = mongoose.model('Campground', campSchema);
 
 // RESTFUL ROUTERS
 // name      url       verb    desc.
@@ -38,29 +34,28 @@ app.get('/', (req, res) =>{
 
 app.get('/campgrounds', (req, res) =>{
     //get campsites from db
-    Campaground.find({}, (err, allCampgrounds) =>{
+    Campground.find({}, (err, allCampgrounds) =>{
         if (err) throw err;
         res.render("index", {campgrounds: allCampgrounds});
     })
-})
+});
 
 app.get('/campgrounds/new', (req, res) =>{
     res.render('new');
-})
+});
 
 // SHOW    /posts/:id  GET     Show info of the post
 app.get('/campgrounds/:id', (req, res) =>{
     //find provide ID
-    Campaground.findById(req.params.id, (err, foundCampground) => {
-        if (err) throw err;
+    Campground.findById(req.params.id).populate('comments').exec((err, foundCampground) => {
+        if (err) throw err;       
         res.render('singleCampground', {campground: foundCampground});
-    })
-
-})
+    });
+});
 
 // POST
 app.post('/campgrounds', (req, res) =>{
-    Campaground.create({
+    Campground.create({
         name: req.body.name, 
         image: req.body.image,
         description: req.body.description
