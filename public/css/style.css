@@ -1,0 +1,14 @@
+#indexTitle{
+    font-size: 3.5rem;
+}
+#indexTitle + p {
+    font-size: 1.5rem;
+}
+.link-button { 
+    background: none;
+    border: none;
+    color: #0066ff;
+    text-decoration: underline;
+    cursor: pointer; 
+    text-decoration: none;
+}

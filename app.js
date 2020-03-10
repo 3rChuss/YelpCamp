@@ -4,6 +4,7 @@ const   express         = require('express'),
         mongoose        = require('mongoose'),
         passport        = require('passport'),
         LocalStrategy   = require('passport-local'),
+        methodOverride  = require('method-override'),
 
         //models
         User        = require('./models/users'),
@@ -49,14 +50,14 @@ passport.deserializeUser(User.deserializeUser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-// Add currentUser to all our templates
+app.use(methodOverride('_method'));
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();
 });
 app.use(indexRoutes);
-app.use(campgroundRoutes);
-app.use('/campgrounds/:id/comments',commentRoutes);
+app.use('/campgrounds', campgroundRoutes);
+app.use('/campgrounds/:id/comments', commentRoutes);
 
 // SERVER LISTEN
 app.listen(3000, function(){

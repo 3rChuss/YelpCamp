@@ -19,6 +19,10 @@
                         <h1 class="card-title"><%- campground.name %></h1>
                         <p class="text-justify"><%= campground.description %></p>
                         <small class="text-muted"><em>Submitted by: <%= campground.author.username%></em></small>
+                        <% if (currentUser && (campground.author.id)){
+                                if(campground.author.id.equals(currentUser.id)){ %>
+                            <small><a class="float-right text-warning" href="/campgrounds/<%=campground._id%>/edit">Edit campground</small>
+                        <% }} %>
                     </div>
                 </div>
                 <div class="card bg-light mt-5">
@@ -33,6 +37,12 @@
                                 <small class="text-muted"><strong>author: </strong><%= comment.author.username %></small>
                                 <small class="float-right text-muted">10 days ago</small>
                                 <p class="card-text"><%= comment.text %></p>
+                                <% if (currentUser) {
+                                    if (comment.author.id.equals(currentUser.id)){ %>
+                                    <small class="text-muted text-warning">
+                                        <a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">edit</a>
+                                    </small>
+                                <% }} %>
                             </div>
                         </div>
                     </div>

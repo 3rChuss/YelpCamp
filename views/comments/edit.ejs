@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>  
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+            <h1 class="pb-3">Edit comment</h1>
+            <form action="/campgrounds/<%= campground_id %>/comments/<%=comment._id%>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <textarea class="form-control" name="comment[text]" rows="5"><%= comment.text %></textarea>
+                </div>
+                <button class="btn btn-primary btn-block" >Update</button>
+            </form>
+            <a class="float-left" href="../../<% campground_id %>" rel="noopener noreferrer">Go back</a>
+            <form action="/campgrounds/<%=campground_id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                <button class="float-right text-danger link-button">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer') %>

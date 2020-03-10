@@ -30,11 +30,46 @@ router.post('/', isLoggedIn ,(req, res) => {
     });
 });
 
+router.get('/:comment_id/edit', checkOwnerShip, (req, res) => {
+    Comment.findById(req.params.comment_id, (err, foundComment) => {
+        if (err) throw err;
+        res.render('comments/edit', {campground_id: req.params.id, comment: foundComment});
+    })
+});
+
+router.put('/:comment_id', checkOwnerShip, (req, res) =>{
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updateComments) => {
+        if (err) throw err;
+        res.redirect('/campgrounds/' + req.params.id);
+    })
+});
+router.delete('/:comment_id', checkOwnerShip, (req, res) => {
+    Comment.findByIdAndRemove(req.params.comment_id, (err) => {
+        if (err) throw err
+        res.redirect('/campgrounds/' + req.params.id);
+    })
+})
+
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
     res.redirect('/login');
+};
+
+function checkOwnerShip(req, res, next) {
+    if(req.isAuthenticated()){
+        Comment.findById(req.params.comment_id, (err, foundComment) => {
+            if (err) throw err;
+            if (foundComment.author.id.equals(req.user._id)){
+                next();
+            }else{
+                res.redirect('back');
+            }
+        })
+    }else{
+        res.redirect('/login');
+    }
 }
 
 module.exports = router;
