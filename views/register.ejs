@@ -1,0 +1,20 @@
+<%- include ('partials/header') %>
+<h1>Sign UP!</h1>
+<form action="/register" method="POST" class="form-inline">
+    <label class="sr-only" for="email">Email</label>
+    <input type="email" class="form-control mb-2 mr-sm-2" name="username" placeholder="Jhon@televes-com" required autocomplete="email">
+    <label for="password" class="sr-only">Password</label>
+    <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+            <div class="input-group-text">🔑</div>
+        </div>
+        <input type="password" required class="form-control" name="password" autocomplete="current-password">
+    </div>
+    <div class="form-check mb-2 mr-sm-2">
+        <input id="rememberme" type="checkbox" class="form-check-input">
+        <label for="rememberme" class="form-check-label">Remember me</label>
+    </div>
+    <button class="btn btn-primary mb-2 mr-sm-2">Sign UP!</button>
+</form>
+
+<%- include ('partials/footer') %>
