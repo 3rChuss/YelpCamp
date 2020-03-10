@@ -1,8 +1,16 @@
-#indexTitle{
-    font-size: 3.5rem;
+@media screen and (min-width: 768px){
+    #indexTitle{
+        font-size: 3.5rem;
+    }
+    #indexTitle + p {
+        font-size: 1.5rem;
+    }
 }
-#indexTitle + p {
-    font-size: 1.5rem;
+
+@media screen and (max-width: 576px){
+    .card-img-top {
+        height: 100% !important;
+    }
 }
 .link-button { 
     background: none;
@@ -11,4 +19,13 @@
     text-decoration: underline;
     cursor: pointer; 
     text-decoration: none;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 17vw;
+    object-fit: cover;
+}
+.img-fluid.card-img-top {
+    height: 100% !important;
 }
