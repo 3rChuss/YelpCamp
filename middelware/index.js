@@ -16,6 +16,7 @@ middlewareObj.checkCampOwnerShip = (req, res, next) => {
                 }
             });
         } else {
+            req.flash('error', 'You must to be login!')
             res.redirect('/login');
         }
     };
@@ -39,7 +40,8 @@ middlewareObj.isLoggedIn = (req, res, next) => {
         if(req.isAuthenticated()){
             return next();
         }
-            res.redirect('/login');
+        req.flash('error', 'You must to be login!');
+        res.redirect('/login');
     };
 
 module.exports = middlewareObj;

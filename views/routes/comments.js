@@ -27,6 +27,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
             comment.save();
             campground.comments.push(comment);
             campground.save();
+            req.flash('success','Comment successfully added!');
             res.redirect('/campgrounds/'+campground._id);
         });
     });
@@ -42,12 +43,14 @@ router.get('/:comment_id/edit', middleware.isLoggedIn, (req, res) => {
 router.put('/:comment_id', middleware.checkCommentsOwnerShip, (req, res) =>{
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updateComments) => {
         if (err) throw err;
+        req.flash('success', 'The comment has been updated successfully!');
         res.redirect('/campgrounds/' + req.params.id);
     })
 });
 router.delete('/:comment_id', middleware.checkCommentsOwnerShip, (req, res) => {
     Comment.findByIdAndRemove(req.params.comment_id, (err) => {
-        if (err) throw err
+        if (err) throw err;
+        req.flash('error', 'The comment has been deleted!');
         res.redirect('/campgrounds/' + req.params.id);
     })
 })

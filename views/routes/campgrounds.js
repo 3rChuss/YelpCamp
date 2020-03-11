@@ -37,6 +37,7 @@ router.post('/', (req, res) =>{
         author: author, 
         }, function(err, campground) {
             if(err) throw err;
+            req.flash('success', 'Campground successfully added!');
             res.redirect('/campgrounds');
         }
     )
@@ -57,6 +58,7 @@ router.put('/:id', middleware.checkCampOwnerShip, (req, res) => {
 router.delete('/:id', middleware.checkCampOwnerShip, (req, res) => {
     Campground.findByIdAndRemove(req.params.id, (err) => {
         if (err) throw err;
+        req.flash('error', 'Campground deleted!');
         res.redirect('/campgrounds');
     });
 });
