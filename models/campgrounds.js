@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const campSchema = new mongoose.Schema({
     name: String, 
     image: String,
-    description: String, 
+    description: String,
+    price: String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

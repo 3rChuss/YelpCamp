@@ -33,7 +33,7 @@
                 <div class="card">
                     <img class="img-fluid card-img-top" src="<%= campground.image %>">
                     <div class="card-body">
-                        <p class="card-text"><small class="text-muted"><a href="#" target="_blank" rel="noopener noreferrer"><%=campground.name%></a></small><small class="text-muted float-right">9.00€/night</small></p>
+                        <p class="card-text"><small class="text-muted"><a href="#" target="_blank" rel="noopener noreferrer"><%=campground.name%></a></small><small class="text-muted float-right">€ <%=campground.price%> / night</small></p>
                         <h1 class="card-title"><%- campground.name %></h1>
                         <p class="text-justify"><%= campground.description %></p>
                         <small class="text-muted"><em>Submitted by: <%= campground.author.username%></em></small>

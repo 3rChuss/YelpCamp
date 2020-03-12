@@ -7,20 +7,24 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- FontAwesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js" integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
+    <!-- Modernizr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/landing.css">
     <link rel="stylesheet" href="/css/style.css">
     <title>YelpCamp</title>
 </head>
 <body>
     <%- include('navbar') %> 
     <div class="container">
-        <% if (error && error != "") { %>
+        <% if (error && error.length > 0) { %>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong><%= error %> </strong>
             <button class="close" type="button" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <% }else if (success && success != "") { %>
+        <% }else if (success && success.length > 0) { %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong><%= success %> </strong>
             <button class="close" type="button" data-dismiss="alert" aria-label="Close">

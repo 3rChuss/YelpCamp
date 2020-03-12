@@ -34,6 +34,7 @@ router.post('/', (req, res) =>{
         name: req.body.name, 
         image: req.body.image,
         description: req.body.description,
+        price: req.body.price,
         author: author, 
         }, function(err, campground) {
             if(err) throw err;
