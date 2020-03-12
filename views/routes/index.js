@@ -14,8 +14,9 @@ router.get('/register', (req, res) => {
 });
 router.post('/register', (req, res) => {
     User.register(new User({username: req.body.username}), req.body.password, (err, user) =>{
-        if(err) throw err;
+        if(err) req.flash('error', err.message);
         passport.authenticate('local')(req, res, () => {
+            req.flash('success', 'Welcome to YelCamp ' + user.username);
             res.redirect('/campgrounds');
         })
     })
@@ -29,7 +30,6 @@ router.post('/login', passport.authenticate('local',
         successRedirect: '/campgrounds',
         failureRedirect: '/login'    
     }), (req, res) => {
-        
     }
 );
 router.get('/loggout', (req, res) =>{
