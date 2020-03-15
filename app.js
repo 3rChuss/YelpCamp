@@ -29,7 +29,8 @@ const   commentRoutes   =   require('./views/routes/comments'),
 
 
 // DATABASE CONFIG
-const url = 'mongodb://localhost:27017/data';
+//const url = 'mongodb://localhost:27017/data';
+const url = 'mongodb+srv://yelpcamp:yelpcamp@cluster0-v6xpx.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(url,  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, function(err, client){
     if (err) throw err;
     console.log("DB connected");
